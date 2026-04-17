@@ -11,10 +11,10 @@ function HomePage() {
   return (
     <main>
       <Navbar />
-      <Hero />
+      <section id="home"><Hero /></section>
       <Stats />
-      <HowItWorks />
-      <Features />
+      <section id="how-it-works"><HowItWorks /></section>
+      <section id="features"><Features /></section>
       <Footer />
     </main>
   )
