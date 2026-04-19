@@ -1,8 +1,25 @@
 # ⚡ RiderPulse
 
-**Drive. Earn. Repeat.**
+> **Drive. Earn. Repeat.**
+> A modern MERN stack platform empowering EV delivery riders — inspired by the seamless experience of OKDriver and the clean design language of Zypp.
 
-A modern MERN stack web platform for EV delivery riders — built to mirror the OKDriver app experience with Zypp-inspired design language.
+---
+
+## 🚀 Overview
+
+RiderPulse is a full-stack web platform designed to streamline onboarding, vehicle allocation, and earnings tracking for EV delivery riders. Built with scalability and real-world usability in mind, it replicates production-grade workflows including KYC, authentication, and scooter assignment.
+
+---
+
+## ✨ Key Features
+
+* 🔐 Secure authentication with JWT
+* 🧾 KYC submission & verification workflow
+* 🛵 Smart scooter selection with filters
+* 📊 Earnings tracking system
+* 📱 Mobile-first responsive UI
+* ⚡ Fast and optimized with Vite + Tailwind
+* 🧠 Real-world inspired rider lifecycle
 
 ---
 
@@ -12,13 +29,7 @@ A modern MERN stack web platform for EV delivery riders — built to mirror the 
 riderpulse/
 ├── client/                  # React + Vite frontend
 │   ├── src/
-│   │   ├── components/
-│   │   │   ├── Navbar.jsx
-│   │   │   ├── Hero.jsx
-│   │   │   ├── Stats.jsx
-│   │   │   ├── HowItWorks.jsx
-│   │   │   ├── Features.jsx
-│   │   │   └── Footer.jsx
+│   │   ├── components/      # Reusable UI components
 │   │   ├── App.jsx
 │   │   ├── main.jsx
 │   │   └── index.css
@@ -28,30 +39,27 @@ riderpulse/
 │
 ├── server/                  # Express + MongoDB backend
 │   ├── models/
-│   │   ├── Driver.js
-│   │   └── Scooter.js
 │   ├── routes/
-│   │   ├── auth.js
-│   │   ├── drivers.js
-│   │   └── scooters.js
 │   ├── middleware/
-│   │   └── auth.js
 │   ├── server.js
 │   └── .env.example
 │
-├── package.json             # Root scripts (concurrently)
+├── package.json             # Root scripts
 └── README.md
 ```
 
 ---
 
-## 🚀 Getting Started
+## ⚙️ Getting Started
 
-### Prerequisites
-- Node.js v18+
-- MongoDB running locally (or MongoDB Atlas URI)
+### 📌 Prerequisites
 
-### 1. Clone & Install
+* Node.js (v18+)
+* MongoDB (local or Atlas)
+
+---
+
+### 1️⃣ Clone Repository
 
 ```bash
 git clone <your-repo-url>
@@ -59,68 +67,71 @@ cd riderpulse
 npm run install:all
 ```
 
-### 2. Configure Environment
+---
+
+### 2️⃣ Setup Environment
 
 ```bash
 cd server
 cp .env.example .env
 ```
 
-Edit `server/.env`:
+Update `.env`:
+
 ```
 PORT=5000
 MONGO_URI=mongodb://localhost:27017/riderpulse
-JWT_SECRET=change_this_to_a_long_random_secret
+JWT_SECRET=your_super_secure_secret
 JWT_EXPIRE=30d
 NODE_ENV=development
 ```
 
-### 3. Run Development Servers
+---
+
+### 3️⃣ Run Development Servers
 
 ```bash
-# From root — starts both client (3000) and server (5000)
 npm run dev
 ```
 
-Or run separately:
+Or separately:
+
 ```bash
-npm run client    # React on http://localhost:3000
-npm run server    # Express on http://localhost:5000
+npm run client   # http://localhost:3000
+npm run server   # http://localhost:5000
 ```
 
 ---
 
-## 🌐 API Endpoints
+## 🌐 API Overview
 
-### Auth
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/auth/register` | Register a new rider |
-| POST | `/api/auth/login` | Login with phone + password |
-| GET | `/api/auth/me` | Get current driver (protected) |
-| PUT | `/api/auth/kyc` | Submit KYC details (protected) |
+### 🔐 Auth Routes
 
-### Drivers
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/drivers/profile` | Get driver profile (protected) |
-| PUT | `/api/drivers/profile` | Update profile (protected) |
-| POST | `/api/drivers/select-scooter/:id` | Select a scooter (protected) |
-| GET | `/api/drivers/earnings` | Get earning stats (protected) |
-| PUT | `/api/drivers/activate` | Activate client ID (protected) |
+* `POST /api/auth/register` → Register rider
+* `POST /api/auth/login` → Login
+* `GET /api/auth/me` → Get current user
+* `PUT /api/auth/kyc` → Submit KYC
 
-### Scooters
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/scooters` | List all scooters (filter: batteryType, sector, available) |
-| GET | `/api/scooters/:id` | Get single scooter |
-| POST | `/api/scooters` | Add new scooter |
-| POST | `/api/scooters/seed` | Seed sample scooters (dev only) |
-| DELETE | `/api/scooters/:id` | Delete a scooter |
+### 👤 Driver Routes
 
-### Example Requests
+* `GET /api/drivers/profile`
+* `PUT /api/drivers/profile`
+* `POST /api/drivers/select-scooter/:id`
+* `GET /api/drivers/earnings`
+* `PUT /api/drivers/activate`
 
-**Register**
+### 🛵 Scooter Routes
+
+* `GET /api/scooters`
+* `GET /api/scooters/:id`
+* `POST /api/scooters`
+* `POST /api/scooters/seed` *(dev only)*
+* `DELETE /api/scooters/:id`
+
+---
+
+## 📦 Sample Request
+
 ```json
 POST /api/auth/register
 {
@@ -130,65 +141,78 @@ POST /api/auth/register
 }
 ```
 
-**Login**
-```json
-POST /api/auth/login
-{
-  "phone": "9876543210",
-  "password": "securepass123"
-}
-```
-
-**Filter Scooters**
-```
-GET /api/scooters?batteryType=Charging&available=true
-```
-
 ---
 
 ## 🎨 Design System
 
-| Token | Value |
-|-------|-------|
-| Brand Green | `#2ECC71` |
-| Dark | `#111111` |
-| Fonts | Syne (headings) + DM Sans (body) |
-| Border Radius | `16–40px` (cards, phones) |
-| Animation | CSS keyframes + hover transitions |
+| Element       | Value                              |
+| ------------- | ---------------------------------- |
+| Primary Color | #2ECC71                            |
+| Background    | #111111                            |
+| Fonts         | Syne + DM Sans                     |
+| UI Style      | Rounded, modern, mobile-first      |
+| Animations    | Smooth transitions + hover effects |
 
 ---
 
-## 🛡️ Auth Flow
+## 🔄 Rider Flow
 
 ```
-Register → JWT Token → Protected Routes
-KYC Submit → Admin Verify → Scooter Select → Activate → Earn
+Register → Login → KYC → Verification → Scooter Selection → Activation → Earnings
 ```
 
 ---
 
-## 📱 Screens Implemented
+## 📱 UI Highlights
 
-- [x] Hero (login/register phone mockup)
-- [x] Stats bar
-- [x] How It Works — Step 1 (KYC, phone: login screen)
-- [x] How It Works — Step 2 (Scooter selection, battery filter popup)
-- [x] Features grid
-- [x] Navbar (sticky, blur on scroll)
-- [x] Footer
+* Hero section with phone mockup
+* Interactive “How It Works” steps
+* Scooter selection UI with filters
+* Sticky navbar with blur effect
+* Clean feature grid & footer
 
 ---
 
 ## 🏗️ Tech Stack
 
-| Layer | Tech |
-|-------|------|
-| Frontend | React 18, Vite, Tailwind CSS |
-| Backend | Node.js, Express 4 |
-| Database | MongoDB, Mongoose |
-| Auth | JWT, bcryptjs |
-| Dev | concurrently, nodemon |
+| Layer          | Technology                   |
+| -------------- | ---------------------------- |
+| Frontend       | React 18, Vite, Tailwind CSS |
+| Backend        | Node.js, Express             |
+| Database       | MongoDB, Mongoose            |
+| Authentication | JWT, bcryptjs                |
+| Dev Tools      | concurrently, nodemon        |
 
 ---
 
-*An ISO 27001:2022 Certified Platform · #MISSION ZERO EMISSION*
+## 🚀 Future Enhancements
+
+* 📲 Real-time order assignment system
+* 📍 Live GPS tracking for riders
+* 💰 Payment & wallet integration
+* 📊 Advanced analytics dashboard
+* 🔔 Push notifications
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+Feel free to fork the repo and submit a pull request.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 💡 Author
+
+**Rahul Shastri**
+Building scalable MERN applications 🚀
+
+---
+
+> *Empowering EV riders with smarter tools · #MissionZeroEmission*
