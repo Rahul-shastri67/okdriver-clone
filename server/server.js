@@ -12,13 +12,32 @@ dotenv.config();
 const app = express();
 
 // CORS Configuration
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://okdriver-clone.vercel.app',
+];
+
 app.use(
   cors({
-    origin: [
-      'http://localhost:5173',
-      'https://okdriver-clone.vercel.app',
-    ],
+    origin: (origin, callback) => {
+      // Postman/server-to-server requests
+      if (!origin) return callback(null, true);
+
+      // Localhost & production domain
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      // Allow all Vercel preview deployments
+      if (origin.endsWith('.vercel.app')) {
+        return callback(null, true);
+      }
+
+      return callback(new Error(`CORS blocked: ${origin}`));
+    },
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
   })
 );
 
